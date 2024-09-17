@@ -3,7 +3,7 @@ import argparse
 import asyncio
 import logging
 
-import pyeiscpcustom
+from .connection import Connection
 
 __all__ = ("console", "monitor")
 
@@ -48,7 +48,7 @@ async def console(loop, log):
     host = args.host
     port = int(args.port)
 
-    conn = await pyeiscp.Connection.create(
+    conn = await Connection.create(
         host=host, port=port, loop=loop, update_callback=log_callback, connect_callback=connect_callback
     )
 
