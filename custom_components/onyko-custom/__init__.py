@@ -1,0 +1,1 @@
+"""The onkyo custom component."""
