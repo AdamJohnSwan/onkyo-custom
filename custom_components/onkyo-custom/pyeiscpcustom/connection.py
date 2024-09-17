@@ -3,7 +3,7 @@ import asyncio
 import logging
 import socket
 import netifaces
-from pyeiscp.protocol import AVR, eISCPPacket
+from pyeiscpcustom.protocol import AVR, eISCPPacket
 
 __all__ = "Connection"
 

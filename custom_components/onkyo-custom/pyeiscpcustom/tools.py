@@ -3,7 +3,7 @@ import argparse
 import asyncio
 import logging
 
-import pyeiscp
+import pyeiscpcustom
 
 __all__ = ("console", "monitor")
 

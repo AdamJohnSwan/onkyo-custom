@@ -6,7 +6,7 @@ import asyncio
 import logging
 from typing import Any, Literal
 
-import pyeiscp
+import pyeiscpcustom
 import voluptuous as vol
 
 from homeassistant.components.media_player import (
@@ -232,7 +232,7 @@ async def async_setup_platform(
                 entity.backfill_state()
 
         _LOGGER.debug("Creating receiver: %s (%s)", info.model_name, info.host)
-        connection = await pyeiscp.Connection.create(
+        connection = await pyeiscpcustom.Connection.create(
             host=info.host,
             port=info.port,
             update_callback=async_onkyo_update_callback,
@@ -269,7 +269,7 @@ async def async_setup_platform(
         _LOGGER.debug("Manually creating receiver: %s (%s)", name, host)
 
         @callback
-        async def async_onkyo_interview_callback(conn: pyeiscp.Connection) -> None:
+        async def async_onkyo_interview_callback(conn: pyeiscpcustom.Connection) -> None:
             """Receiver interviewed, connection not yet active."""
             info = ReceiverInfo(conn.host, conn.port, conn.name, conn.identifier)
             _LOGGER.debug("Receiver interviewed: %s (%s)", info.model_name, info.host)
@@ -277,7 +277,7 @@ async def async_setup_platform(
                 KNOWN_HOSTS.append(info.host)
                 await async_setup_receiver(info, False, name)
 
-        await pyeiscp.Connection.discover(
+        await pyeiscpcustom.Connection.discover(
             host=host,
             discovery_callback=async_onkyo_interview_callback,
         )
@@ -285,7 +285,7 @@ async def async_setup_platform(
         _LOGGER.debug("Discovering receivers")
 
         @callback
-        async def async_onkyo_discovery_callback(conn: pyeiscp.Connection) -> None:
+        async def async_onkyo_discovery_callback(conn: pyeiscpcustom.Connection) -> None:
             """Receiver discovered, connection not yet active."""
             info = ReceiverInfo(conn.host, conn.port, conn.name, conn.identifier)
             _LOGGER.debug("Receiver discovered: %s (%s)", info.model_name, info.host)
@@ -293,7 +293,7 @@ async def async_setup_platform(
                 KNOWN_HOSTS.append(info.host)
                 await async_setup_receiver(info, True, None)
 
-        await pyeiscp.Connection.discover(
+        await pyeiscpcustom.Connection.discover(
             discovery_callback=async_onkyo_discovery_callback,
         )
 

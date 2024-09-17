@@ -4,14 +4,14 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-import pyeiscp
+import pyeiscpcustom
 
 
 @dataclass
 class Receiver:
     """Onkyo receiver."""
 
-    conn: pyeiscp.Connection
+    conn: pyeiscpcustom.Connection
     model_name: str
     identifier: str
     name: str

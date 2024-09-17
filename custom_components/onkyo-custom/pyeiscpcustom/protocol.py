@@ -4,8 +4,8 @@ import logging
 import time
 import struct
 import re
-from pyeiscp import commands
-from pyeiscp.utils import ValueRange
+from pyeiscpcustom import commands
+from pyeiscpcustom.utils import ValueRange
 from collections import namedtuple
 
 __all__ = "AVR"
