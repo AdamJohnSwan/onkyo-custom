@@ -3,7 +3,6 @@ import asyncio
 import logging
 import socket
 import netifaces
-import pdb
 from pyeiscp.protocol import AVR, eISCPPacket
 
 __all__ = "Connection"
@@ -261,7 +260,6 @@ class Connection:
 
         async def discovered_callback(discovered_host, port, name, identifier):
             """Async function callback for Discovery Protocol when an AVR is discovered"""
-            breakpoint()
             # Create a Connection, but do not auto connect
             conn = await cls.create(
                 host=discovered_host,
