@@ -18,6 +18,7 @@ import argparse
 
 from dataclasses import dataclass
 
+from collections import namedtuple
 
 from homeassistant.components.media_player import (
     DOMAIN as MEDIA_PLAYER_DOMAIN,
