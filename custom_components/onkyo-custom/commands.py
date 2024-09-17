@@ -5,7 +5,7 @@
 #  at 2019-06-16 18:16:40.906934
 
 from collections import OrderedDict
-from .utils import ValueRange
+from utils import ValueRange
 
 COMMANDS = OrderedDict([('main', OrderedDict([('PWR', {'values': OrderedDict([('00', {'name': ('standby',
       'off'),

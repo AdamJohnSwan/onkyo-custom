@@ -3,7 +3,7 @@ import argparse
 import asyncio
 import logging
 
-from .connection import Connection
+from connection import Connection
 
 __all__ = ("console", "monitor")
 

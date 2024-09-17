@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from .connection import Connection
+from connection import Connection
 
 
 @dataclass

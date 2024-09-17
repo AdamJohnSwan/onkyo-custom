@@ -6,7 +6,7 @@ import asyncio
 import logging
 from typing import Any, Literal
 
-from .connection import Connection
+from connection import Connection
 import voluptuous as vol
 
 from homeassistant.components.media_player import (

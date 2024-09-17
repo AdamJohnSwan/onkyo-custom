@@ -4,9 +4,9 @@ import logging
 import time
 import struct
 import re
-import commands
-from .utils import ValueRange
-from .collections import namedtuple
+from commands import ZONE_MAPPINGS, COMMANDS, VALUE_MAPPINGS, COMMAND_MAPPINGS 
+from utils import ValueRange
+from collections import namedtuple
 
 __all__ = "AVR"
 
@@ -200,12 +200,12 @@ def command_to_iscp(command, arguments=None, zone=None):
                 raise ValueError("Need at least command and argument")
 
     # Find the command in our database, resolve to internal eISCP command
-    group = commands.ZONE_MAPPINGS.get(zone, zone)
-    if not zone in commands.COMMANDS:
+    group = ZONE_MAPPINGS.get(zone, zone)
+    if not zone in COMMANDS:
         raise ValueError('"{}" is not a valid zone'.format(zone))
 
-    prefix = commands.COMMAND_MAPPINGS[group].get(command, command)
-    if not prefix in commands.COMMANDS[group]:
+    prefix = COMMAND_MAPPINGS[group].get(command, command)
+    if not prefix in COMMANDS[group]:
         raise ValueError(
             '"{}" is not a valid command in zone "{}"'.format(command, zone)
         )
@@ -219,10 +219,10 @@ def command_to_iscp(command, arguments=None, zone=None):
 
     # 1. Consider if there is a alias, e.g. level-up for UP.
     try:
-        value = commands.VALUE_MAPPINGS[group][prefix][argument]
+        value = VALUE_MAPPINGS[group][prefix][argument]
     except KeyError:
         # 2. See if we can match a range or pattern
-        for possible_arg in commands.VALUE_MAPPINGS[group][prefix]:
+        for possible_arg in VALUE_MAPPINGS[group][prefix]:
             if argument.isdigit():
                 if isinstance(possible_arg, ValueRange):
                     if int(argument) in possible_arg:
@@ -241,7 +241,7 @@ def command_to_iscp(command, arguments=None, zone=None):
 
 
 def iscp_to_command(iscp_message):
-    for zone, zone_cmds in commands.COMMANDS.items():
+    for zone, zone_cmds in COMMANDS.items():
         # For now, ISCP commands are always three characters, which
         # makes this easy.
         command, args = iscp_message[:3], iscp_message[3:]
