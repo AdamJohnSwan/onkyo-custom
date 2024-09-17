@@ -1,4 +1,4 @@
-# Onyko 
+# Onkyo 
 
 Making this to deal with errors with my Integra stereo while I wait for pyeiscp to accept my PR.
 

@@ -1,6 +1,6 @@
 {
-  "domain": "onyko-custom",
-  "name": "Onyko-custom",
+  "domain": "onkyo-custom",
+  "name": "Onkyo-custom",
   "codeowners": ["@AdamJohnSwan"],
   "documentation": "https://www.home-assistant.io/integrations/onkyo",
   "iot_class": "local_push",

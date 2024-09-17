@@ -22,14 +22,14 @@ jobs:
       
       - name: ZIP files
         run: |
-          cd /home/runner/work/onyko-custom/onyko-custom/custom_components/onyko-custom
-          zip onyko-custom.zip -r ./
+          cd /home/runner/work/onkyo-custom/onkyo-custom/custom_components/onkyo-custom
+          zip onkyo-custom.zip -r ./
       - name: Upload zip to release
         uses: svenstaro/upload-release-action@v1-release
 
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: /home/runner/work/onyko-custom/onyko-custom/custom_components/onyko-custom/onyko-custom.zip
-          asset_name: onyko-custom.zip
+          file: /home/runner/work/onkyo-custom/onkyo-custom/custom_components/onkyo-custom/onkyo-custom.zip
+          asset_name: onkyo-custom.zip
           tag: ${{ github.ref }}
           overwrite: true
