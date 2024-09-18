@@ -18,7 +18,7 @@ import argparse
 
 from dataclasses import dataclass
 
-from collections import namedtuple
+from collections import namedtuple, OrderedDict
 
 from homeassistant.components.media_player import (
     DOMAIN as MEDIA_PLAYER_DOMAIN,
@@ -39,6 +39,28 @@ from homeassistant.helpers import config_validation as cv
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.typing import ConfigType, DiscoveryInfoType
 from homeassistant.util.hass_dict import HassKey
+
+try:
+    ensure_future = asyncio.ensure_future
+except AttributeError:
+    ensure_future = getattr(asyncio, "async")
+
+class ValueRange(object):
+    """Some command values are defined as a range of possible
+    values, such as from 1 to 100. We use a custom type to represen
+    this.
+    We used to use range() or xrange(), but a list is not hashable,
+    and a generator can be exhausted after use.
+    """
+
+    def __init__(self, start, end):
+        self.start = start
+        self.end = end
+
+        self._range = tuple(range(start, end))
+
+    def __contains__(self, value):
+        return value in self._range
 
 class ISCPMessage(object):
     """Deals with formatting and parsing data wrapped in an ISCP
